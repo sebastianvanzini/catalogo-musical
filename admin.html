@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador | Sebastián Vanzini</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f0f12',
+                            card: '#18181c',
+                            accent: '#8b5cf6',
+                            gold: '#f59e0b',
+                            muted: '#9ca3af'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[#0f0f12] text-gray-100 min-h-screen p-6">
+
+    <!-- Pantalla de Login Simple -->
+    <div id="login-screen" class="max-w-md mx-auto mt-20 p-8 bg-[#18181c] rounded-2xl border border-white/10 shadow-2xl space-y-6">
+        <div class="text-center space-y-2">
+            <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 mx-auto flex items-center justify-center text-xl">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <h2 class="text-2xl font-bold">Acceso Administrador</h2>
+            <p class="text-xs text-gray-400">Ingresá tu clave para gestionar el catálogo</p>
+        </div>
+        <input type="password" id="pass-input" placeholder="Contraseña" class="w-full px-4 py-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm focus:outline-none focus:border-purple-500">
+        <button onclick="checkPass()" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl text-sm transition">Ingresar al Panel</button>
+    </div>
+
+    <!-- Panel Principal -->
+    <div id="admin-panel" class="hidden max-w-4xl mx-auto space-y-8">
+        
+        <header class="flex items-center justify-between border-b border-white/10 pb-4">
+            <div>
+                <h1 class="text-2xl font-bold text-white">Gestor de Obras Musicales</h1>
+                <p class="text-xs text-gray-400">Administrá canciones, agrupá sub-versiones y cargá letras/acordes.</p>
+            </div>
+            <a href="index.html" target="_blank" class="px-4 py-2 bg-white/10 hover:bg-white/15 text-xs rounded-lg text-white font-medium transition">
+                <i class="fa-solid fa-eye mr-1"></i> Ver Sitio Público
+            </a>
+        </header>
+
+        <!-- Formulario para Nueva Obra -->
+        <section class="bg-[#18181c] p-6 rounded-2xl border border-white/10 space-y-4">
+            <h3 class="text-lg font-bold text-purple-400 flex items-center gap-2">
+                <i class="fa-solid fa-plus-circle"></i> Cargar Nueva Obra o Editar
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Título de la Obra</label>
+                    <input type="text" id="obra-titulo" placeholder="Ej: Labios de Cristal" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Estado Legal</label>
+                    <input type="text" id="obra-estado" placeholder="Ej: Registrado DNDA / SADAIC" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Descripción / Reseña Corta</label>
+                <input type="text" id="obra-desc" placeholder="Ej: Obra adaptable a movida tropical..." class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm">
+            </div>
+
+            <!-- Sección Dinámica de Versiones -->
+            <div class="border-t border-b border-white/5 py-4 space-y-3">
+                <div class="flex items-center justify-between">
+                    <label class="text-xs font-bold text-amber-400">Sub-versiones de Audio (MP3)</label>
+                    <button onclick="agregarCampoVersion()" class="text-xs px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-lg hover:bg-amber-500/20">+ Agregar otra versión</button>
+                </div>
+                
+                <div id="contenedor-versiones" class="space-y-2">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 item-version">
+                        <input type="text" placeholder="Nombre (Ej: Versión Cuarteto)" class="v-nombre p-2.5 bg-[#0f0f12] border border-white/10 rounded-lg text-xs">
+                        <input type="text" placeholder="Archivo (Ej: labios-cuarteto.mp3)" class="v-archivo p-2.5 bg-[#0f0f12] border border-white/10 rounded-lg text-xs">
+                        <input type="text" placeholder="Etiqueta (Ej: Cuarteto)" class="v-etiqueta p-2.5 bg-[#0f0f12] border border-white/10 rounded-lg text-xs">
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Letra Completa</label>
+                    <textarea id="obra-letra" rows="5" placeholder="Pegá la letra aquí..." class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-xs font-mono"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Acordes / Cifrado</label>
+                    <textarea id="obra-acordes" rows="5" placeholder="Ej: Prog: Am - Dm - G - C" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-xs font-mono"></textarea>
+                </div>
+            </div>
+
+            <button onclick="guardarObra()" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl text-sm transition">Guardar Obra en el Catálogo</button>
+        </section>
+
+    </div>
+
+    <script>
+        function checkPass() {
+            const input = document.getElementById('pass-input').value;
+            if(input === 'vanzini2026' || input === 'admin') {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('admin-panel').classList.remove('hidden');
+            } else {
+                alert('Contraseña incorrecta');
+            }
+        }
+
+        function agregarCampoVersion() {
+            const div = document.createElement('div');
+            div.className = 'grid grid-cols-1 md:grid-cols-3 gap-2 item-version';
+            div.innerHTML = `
+                <input type="text" placeholder="Nombre (Ej: Versión Cumbia)" class="v-nombre p-2.5 bg-[#0f0f12] border border-white/10 rounded-lg text-xs">
+                <input type="text" placeholder="Archivo (Ej: labios-cumbia.mp3)" class="v-archivo p-2.5 bg-[#0f0f12] border border-white/10 rounded-lg text-xs">
+                <input type="text" placeholder="Etiqueta (Ej: Cumbia)" class="v-etiqueta p-2.5 bg-[#0f0f12] border border-white/10 rounded-lg text-xs">
+            `;
+            document.getElementById('contenedor-versiones').appendChild(div);
+        }
+
+        function guardarObra() {
+            alert('Obra configurada correctamente. Recordá coordinar el nombre exacto de tus MP3 subidos a GitHub.');
+        }
+    </script>
+</body>
+</html>
