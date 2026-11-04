@@ -95,7 +95,7 @@
 
     <main class="max-w-6xl mx-auto px-4 lg:px-8 py-10 w-full flex-grow space-y-12">
 
-        <!-- VISTA DEL PANEL DE ADMINISTRACIÓN (Se activa con #admin en la URL) -->
+        <!-- PANEL DE ADMINISTRACIÓN (Se abre automáticamente con #admin) -->
         <div id="admin-container" class="hidden glass-panel p-8 rounded-3xl border border-purple-500/30 space-y-6">
             <div class="flex items-center justify-between border-b border-white/10 pb-4">
                 <div>
@@ -109,17 +109,17 @@
                 </button>
             </div>
 
-            <!-- Contraseña de Acceso -->
+            <!-- Login del Panel -->
             <div id="admin-login" class="max-w-md mx-auto py-10 space-y-4 text-center">
                 <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 mx-auto flex items-center justify-center text-xl">
                     <i class="fa-solid fa-lock"></i>
                 </div>
                 <h3 class="text-lg font-bold">Ingresá tu contraseña de administrador</h3>
-                <input type="password" id="admin-pass" placeholder="Contraseña (ej: vanzini2026)" class="w-full px-4 py-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm text-center">
+                <input type="password" id="admin-pass" placeholder="Contraseña (ej: vanzini2026)" class="w-full px-4 py-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm text-center text-white">
                 <button onclick="validarAdmin()" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl text-sm transition">Ingresar</button>
             </div>
 
-            <!-- Contenido del Gestor -->
+            <!-- Contenido Privado -->
             <div id="admin-content" class="hidden space-y-6">
                 <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-200">
                     <i class="fa-solid fa-circle-info mr-1"></i> Desde aquí podés estructurar nuevas obras. Recordá subir los archivos `.mp3` correspondientes a la raíz de tu GitHub.
@@ -127,16 +127,16 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs text-brand-muted mb-1">Título de la Obra</label>
-                        <input type="text" id="new-title" placeholder="Ej: Nueva Obra" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm">
+                        <input type="text" id="new-title" placeholder="Ej: Nueva Obra" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm text-white">
                     </div>
                     <div>
                         <label class="block text-xs text-brand-muted mb-1">Género / Versión</label>
-                        <input type="text" id="new-genre" placeholder="Ej: Cuarteto / Cumbia" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm">
+                        <input type="text" id="new-genre" placeholder="Ej: Cuarteto / Cumbia" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm text-white">
                     </div>
                 </div>
                 <div>
                     <label class="block text-xs text-brand-muted mb-1">Nombre exacto del archivo MP3 en GitHub</label>
-                    <input type="text" id="new-src" placeholder="Ej: mi-cancion-cuarteto.mp3" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm">
+                    <input type="text" id="new-src" placeholder="Ej: mi-cancion-cuarteto.mp3" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm text-white">
                 </div>
                 <button onclick="guardarObraAdmin()" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl text-sm transition">Guardar y Actualizar Vista</button>
             </div>
@@ -185,7 +185,7 @@
             </div>
         </section>
 
-        <!-- Song Catalog Section (AGRUPADO POR OBRA) -->
+        <!-- Song Catalog Section (AGRUPADO POR OBRA CON SUB-VERSIONES) -->
         <section id="catalog" class="space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-4">
                 <div>
@@ -349,7 +349,7 @@
         <span id="toast-msg">Enlace copiado al portapapeles</span>
     </div>
 
-    <!-- JavaScript Logic & Admin router -->
+    <!-- JavaScript Logic -->
     <script>
         const playlist = [
             {
@@ -379,10 +379,11 @@
         const currentTimeEl = document.getElementById('current-time');
         const durationTimeEl = document.getElementById('duration-time');
 
-        // Router para abrir el panel de admin si la URL termina en #admin
+        // Detecta automáticamente si se accede con #admin en la URL
         window.addEventListener('DOMContentLoaded', () => {
             if(window.location.hash === '#admin') {
                 document.getElementById('admin-container').classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
 
