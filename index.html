@@ -6,19 +6,25 @@
     <title>Sebastián Vanzini - Catálogo de Composiciones</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #38bdf8;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-color: #0b132b;
+            --card-bg: #1c2541;
+            --accent-color: #ff7b00;
+            --text-main: #ffffff;
+            --text-muted: #a0aec0;
+            --border-color: #3a506b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            margin: 0;
-            padding: 20px;
+            padding: 40px 20px;
             display: flex;
             justify-content: center;
         }
@@ -30,108 +36,125 @@
 
         header {
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 25px;
             background: var(--card-bg);
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            border-top: 4px solid var(--accent-color);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
-            margin: 0 0 10px 0;
             color: var(--accent-color);
-            font-size: 2.2rem;
+            font-size: 2.4rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
 
         .subtitle {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            font-weight: 500;
         }
 
         .bio {
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 0.98rem;
+            line-height: 1.65;
             color: #cbd5e1;
-            max-width: 650px;
+            max-width: 660px;
             margin: 0 auto;
         }
 
         .song-card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
         }
 
         .song-title {
-            font-size: 1.4rem;
-            margin: 0 0 5px 0;
+            font-size: 1.55rem;
             color: var(--text-main);
+            margin-bottom: 6px;
         }
 
         .song-desc {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         .version-group {
-            margin-top: 12px;
-            padding: 10px;
-            background: rgba(15, 23, 42, 0.5);
+            margin-top: 14px;
+            padding: 14px;
+            background: rgba(11, 19, 43, 0.7);
+            border-left: 4px solid var(--accent-color);
             border-radius: 8px;
         }
 
         .version-name {
-            font-weight: bold;
-            font-size: 0.9rem;
+            font-weight: 600;
+            font-size: 0.92rem;
             color: var(--accent-color);
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         audio {
             width: 100%;
-            height: 36px;
-            margin-top: 5px;
+            height: 40px;
+            outline: none;
         }
 
         .contact-card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
+            border-radius: 16px;
+            padding: 35px 25px;
             text-align: center;
-            margin-top: 30px;
+            margin-top: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .contact-card h3 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
         }
 
         .contact-btn {
             display: inline-block;
             background-color: #25d366;
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
+            padding: 14px 28px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
-            margin: 10px;
-            transition: transform 0.2s;
+            font-size: 0.95rem;
+            margin: 10px 8px 0 8px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            transition: all 0.2s ease;
         }
 
         .contact-btn.mail {
             background-color: var(--accent-color);
-            color: #0f172a;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
         }
 
         .contact-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
         }
 
         footer {
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-top: 30px;
+            margin-top: 40px;
             padding-bottom: 20px;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -139,12 +162,12 @@
 
 <div class="container">
 
-    <!-- SECCIÓN DE PRESENTACIÓN -->
+    <!-- CABECERA PRINCIPAL -->
     <header>
         <h1>Sebastián Vanzini</h1>
         <div class="subtitle">Músico, Autor y Compositor Independiente</div>
         <p class="bio">
-            Bienvenido a mi catálogo profesional de composiciones. Exploro la versatilidad de mis canciones adaptándolas a distintos géneros para que productores, sellos y artistas puedan visualizar el potencial melódico e interpretativo de cada obra.
+            Bienvenido a mi catálogo profesional de composiciones. Exploro la versatilidad de mis obras adaptándolas a distintos géneros para que productores, sellos y artistas puedan visualizar el potencial melódico e interpretativo de cada repertorio.
         </p>
     </header>
 
@@ -175,21 +198,12 @@
         </div>
     </div>
 
-    <!-- CANCIÓN 3: CHACARERA -->
-    <div class="song-card">
-        <h2 class="song-title">Chacarera Salteña</h2>
-        <div class="song-desc">Composición folclórica de pulso vivo (120 BPM) con instrumentación tradicional.</div>
-
-        <div class="version-group">
-            <div class="version-name">🎸 Maqueta Original (Guitarra y Voz)</div>
-            <audio controls src="chacarera-acustica.mp3"></audio>
-        </div>
-    </div>
-
     <!-- CONTACTO PROFESIONAL -->
     <div class="contact-card">
         <h3>¿Te interesa alguna obra para tu catálogo o artista?</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Ponete en contacto directo para licencias, cesiones o maquetas exclusivas.</p>
+        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 15px;">
+            Ponete en contacto directo para licencias, cesiones o maquetas exclusivas.
+        </p>
         
         <a href="https://wa.me/543546521127" class="contact-btn" target="_blank">
             💬 WhatsApp (+54 3546 52-1127)
@@ -200,7 +214,7 @@
         </a>
     </div>
 
-    <!-- FOOTER / COPYRIGHT -->
+    <!-- PIE DE PÁGINA / COPYRIGHT -->
     <footer>
         <p>© 2026 Sebastián Vanzini. Todos los derechos reservados.</p>
         <p>Obras registradas / en proceso de depósito legal en DNDA y SADAIC (Argentina).</p>
