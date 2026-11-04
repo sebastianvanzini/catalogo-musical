@@ -1,226 +1,228 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sebastián Vanzini - Catálogo de Composiciones</title>
+    <title>Sebastián Vanzini | Catálogo de Obras Originales</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f0f12',
+                            card: '#18181c',
+                            cardHover: '#222228',
+                            accent: '#8b5cf6',
+                            accentHover: '#7c3aed',
+                            gold: '#f59e0b',
+                            text: '#f3f4f6',
+                            muted: '#9ca3af'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #0b132b;
-            --card-bg: #1c2541;
-            --accent-color: #ff7b00;
-            --text-main: #ffffff;
-            --text-muted: #a0aec0;
-            --border-color: #3a506b;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f0f12;
+            color: #f3f4f6;
         }
-
-        .container {
-            max-width: 800px;
-            width: 100%;
+        .glass-panel {
+            background: rgba(24, 24, 28, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-
-        header {
-            text-align: center;
-            padding: 40px 25px;
-            background: var(--card-bg);
-            border-radius: 16px;
-            margin-bottom: 30px;
-            border-top: 4px solid var(--accent-color);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        .gradient-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        h1 {
-            color: var(--accent-color);
-            font-size: 2.4rem;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .subtitle {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            margin-bottom: 18px;
-            font-weight: 500;
+        ::-webkit-scrollbar-track {
+            background: #0f0f12;
         }
-
-        .bio {
-            font-size: 0.98rem;
-            line-height: 1.65;
-            color: #cbd5e1;
-            max-width: 660px;
-            margin: 0 auto;
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
         }
-
-        .song-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 25px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-        }
-
-        .song-title {
-            font-size: 1.55rem;
-            color: var(--text-main);
-            margin-bottom: 6px;
-        }
-
-        .song-desc {
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            margin-bottom: 18px;
-        }
-
-        .version-group {
-            margin-top: 14px;
-            padding: 14px;
-            background: rgba(11, 19, 43, 0.7);
-            border-left: 4px solid var(--accent-color);
-            border-radius: 8px;
-        }
-
-        .version-name {
-            font-weight: 600;
-            font-size: 0.92rem;
-            color: var(--accent-color);
-            margin-bottom: 8px;
-        }
-
-        audio {
-            width: 100%;
-            height: 40px;
-            outline: none;
-        }
-
-        .contact-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 35px 25px;
-            text-align: center;
-            margin-top: 40px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-        }
-
-        .contact-card h3 {
-            color: var(--accent-color);
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        .contact-btn {
-            display: inline-block;
-            background-color: #25d366;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.95rem;
-            margin: 10px 8px 0 8px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-            transition: all 0.2s ease;
-        }
-
-        .contact-btn.mail {
-            background-color: var(--accent-color);
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        footer {
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 40px;
-            padding-bottom: 20px;
-            line-height: 1.5;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-purple-500 selection:text-white pb-28">
 
-<div class="container">
-
-    <!-- CABECERA PRINCIPAL -->
-    <header>
-        <h1>Sebastián Vanzini</h1>
-        <div class="subtitle">Músico, Autor y Compositor Independiente</div>
-        <p class="bio">
-            Bienvenido a mi catálogo profesional de composiciones. Exploro la versatilidad de mis obras adaptándolas a distintos géneros para que productores, sellos y artistas puedan visualizar el potencial melódico e interpretativo de cada repertorio.
-        </p>
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-white/5 px-4 lg:px-8 py-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-amber-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-purple-500/20">
+                    <i class="fa-solid fa-compact-disc animate-spin-slow"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-white leading-none">Sebastián Vanzini</h1>
+                    <span class="text-xs text-brand-muted tracking-wide uppercase">Músico, Autor & Compositor</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Obras Registradas DNDA / SADAIC
+                </span>
+                <a href="#contact" class="px-4 py-2 text-sm font-medium rounded-lg bg-brand-accent hover:bg-brand-accentHover text-white transition-all shadow-lg shadow-purple-500/20 flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-xs"></i> Contactar
+                </a>
+            </div>
+        </div>
     </header>
 
-    <!-- CANCIÓN 1: LABIOS DE CRISTAL -->
-    <div class="song-card">
-        <h2 class="song-title">Labios de Cristal</h2>
-        <div class="song-desc">Composición original con arreglos adaptables para la movida tropical y cuartetera.</div>
+    <main class="max-w-6xl mx-auto px-4 lg:px-8 py-10 w-full flex-grow space-y-12">
 
-        <div class="version-group">
-            <div class="version-name">🕺 Versión Cuarteto</div>
-            <audio controls src="labios de cristal - cuarteto.mp3"></audio>
-        </div>
+        <!-- Hero Section -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center glass-panel p-8 rounded-3xl border border-white/10 relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="md:col-span-2 space-y-4 relative z-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-purple-500/10 text-purple-300 text-xs font-semibold border border-purple-500/20">
+                    <i class="fa-solid fa-music"></i> Pitching para Editoriales & Productores
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                    Composiciones inéditas listas para <span class="gradient-text">grabar & producir</span>.
+                </h2>
+                <p class="text-brand-muted text-sm md:text-base leading-relaxed">
+                    Catálogo de canciones originales desarrolladas con maquetas vocal e instrumental. Diseñadas para ceder derechos de interpretación, grabación y adaptación en géneros populares (Cuarteto, Cumbia, Pop, Folclore).
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#catalog" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-sm font-medium transition flex items-center gap-2">
+                        <i class="fa-solid fa-headphones text-purple-400"></i> Escuchar Maquetas
+                    </a>
+                    <button onclick="copyPitchLink()" class="px-5 py-2.5 rounded-xl bg-transparent border border-white/10 hover:border-white/20 text-brand-muted hover:text-white text-sm font-medium transition flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> Copiar Link de Catálogo
+                    </button>
+                </div>
+            </div>
 
-        <div class="version-group">
-            <div class="version-name">🌴 Versión Cumbia</div>
-            <audio controls src="labios de cristal - cumbia.mp3"></audio>
-        </div>
-    </div>
+            <!-- Profile / Studio Avatar -->
+            <div class="flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-dark/50 border border-white/5 relative z-10 text-center">
+                <div class="relative mb-4">
+                    <div class="w-28 h-28 rounded-full bg-gradient-to-tr from-purple-900 to-slate-800 border-2 border-brand-accent/40 flex items-center justify-center text-brand-accent text-4xl shadow-xl">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div class="absolute bottom-0 right-0 bg-brand-gold text-black rounded-full p-2 text-xs font-bold shadow-md">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                </div>
+                <h3 class="font-bold text-white text-base">Sebastián Vanzini</h3>
+                <p class="text-xs text-brand-muted mt-1">Letra, Melodías & Armonías Originales</p>
+                <div class="mt-3 inline-block px-3 py-1 bg-white/5 rounded-full text-[11px] text-amber-400">
+                    <i class="fa-solid fa-shield-halved mr-1"></i> Protegido bajo SADAIC / DNDA
+                </div>
+            </div>
+        </section>
 
-    <!-- CANCIÓN 2: VALLE -->
-    <div class="song-card">
-        <h2 class="song-title">Valle</h2>
-        <div class="song-desc">Obra versátil con estructura adaptable a géneros populares.</div>
+        <!-- Song Catalog Section -->
+        <section id="catalog" class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-4">
+                <div>
+                    <h3 class="text-2xl font-bold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-list-ul text-brand-accent"></i> Obras Disponibles
+                    </h3>
+                    <p class="text-xs text-brand-muted mt-1">Hacé clic en reproducir para escuchar las distintas versiones de cada maqueta.</p>
+                </div>
+            </div>
 
-        <div class="version-group">
-            <div class="version-name">🕺 Versión Cuarteto</div>
-            <audio controls src="valle-cuarteto.mp3"></audio>
-        </div>
-    </div>
+            <div class="space-y-4">
 
-    <!-- CONTACTO PROFESIONAL -->
-    <div class="contact-card">
-        <h3>¿Te interesa alguna obra para tu catálogo o artista?</h3>
-        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 15px;">
-            Ponete en contacto directo para licencias, cesiones o maquetas exclusivas.
-        </p>
-        
-        <a href="https://wa.me/543546521127" class="contact-btn" target="_blank">
-            💬 WhatsApp (+54 3546 52-1127)
-        </a>
-        
-        <a href="mailto:sebastian.vanzini87@gmail.com" class="contact-btn mail">
-            ✉️ Enviar Correo
-        </a>
-    </div>
+                <!-- SONG CARD 1: LABIOS DE CRISTAL -->
+                <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-brand-accent/40 transition-all space-y-4 group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <button onclick="playTrack(0)" id="play-btn-0" class="w-14 h-14 rounded-2xl bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center text-xl shadow-lg shadow-purple-500/30 transition-transform transform active:scale-95 flex-shrink-0">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </button>
+                            <div>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <h4 class="text-xl font-bold text-white group-hover:text-purple-300 transition">Labios de Cristal</h4>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                                        Cuarteto / Cumbia
+                                    </span>
+                                </div>
+                                <p class="text-xs text-brand-muted mt-1.5">
+                                    Composición original con arreglos adaptables para la movida tropical y cuartetera.
+                                </p>
+                            </div>
+                        </div>
 
-    <!-- PIE DE PÁGINA / COPYRIGHT -->
-    <footer>
-        <p>© 2026 Sebastián Vanzini. Todos los derechos reservados.</p>
-        <p>Obras registradas / en proceso de depósito legal en DNDA y SADAIC (Argentina).</p>
-    </footer>
+                        <!-- Versiones de la Canción 1 -->
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button onclick="playTrack(0)" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-medium text-amber-400 border border-amber-500/20 transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-play text-[10px]"></i> Ver. Cuarteto
+                            </button>
+                            <button onclick="playTrack(1)" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-medium text-purple-300 border border-purple-500/20 transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-play text-[10px]"></i> Ver. Cumbia
+                            </button>
+                            <a href="#contact" class="px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 text-xs font-medium transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-handshake"></i> Solicitar
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-</div>
+                <!-- SONG CARD 2: VALLE -->
+                <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-brand-accent/40 transition-all space-y-4 group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <button onclick="playTrack(2)" id="play-btn-2" class="w-14 h-14 rounded-2xl bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center text-xl shadow-lg shadow-purple-500/30 transition-transform transform active:scale-95 flex-shrink-0">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </button>
+                            <div>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <h4 class="text-xl font-bold text-white group-hover:text-purple-300 transition">Valle</h4>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                        Cuarteto / Pop
+                                    </span>
+                                </div>
+                                <p class="text-xs text-brand-muted mt-1.5">
+                                    Obra versátil con estructura adaptable a géneros populares e internacionales.
+                                </p>
+                            </div>
+                        </div>
 
-</body>
-</html>
+                        <div class="flex items-center gap-3">
+                            <button onclick="toggleLyrics('lyrics-1')" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-medium text-white transition flex items-center gap-2">
+                                <i class="fa-solid fa-align-left text-brand-accent"></i> Ver Letra
+                            </button>
+                            <a href="#contact" class="px-3 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 text-xs font-medium transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-handshake"></i> Solicitar
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Ficha de Letra de Valle -->
+                    <div id="lyrics-1" class="hidden pt-4 border-t border-white/5 space-y-3">
+                        <div class="p-4 rounded-xl bg-brand-dark/80 border border-white/5 text-xs text-brand-muted font-mono leading-relaxed max-h-64 overflow-y-auto space-y-3">
+                            <p class="text-white">Para consultar la letra completa o la ficha técnica de esta obra, ponete en contacto directo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SONG CARD 3: CHACARERA SALTEÑA -->
+                <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-brand-accent/40 transition-all space-y-4 group">
