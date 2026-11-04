@@ -95,7 +95,54 @@
 
     <main class="max-w-6xl mx-auto px-4 lg:px-8 py-10 w-full flex-grow space-y-12">
 
-        <!-- Hero Section con tu Presentación -->
+        <!-- VISTA DEL PANEL DE ADMINISTRACIÓN (Se activa con #admin en la URL) -->
+        <div id="admin-container" class="hidden glass-panel p-8 rounded-3xl border border-purple-500/30 space-y-6">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-purple-400 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders"></i> Panel de Gestión Interna
+                    </h2>
+                    <p class="text-xs text-brand-muted">Administración de canciones, versiones, letras y acordes.</p>
+                </div>
+                <button onclick="cerrarAdmin()" class="px-4 py-2 bg-white/10 hover:bg-white/15 text-xs rounded-lg text-white font-medium transition">
+                    <i class="fa-solid fa-xmark mr-1"></i> Cerrar Panel
+                </button>
+            </div>
+
+            <!-- Contraseña de Acceso -->
+            <div id="admin-login" class="max-w-md mx-auto py-10 space-y-4 text-center">
+                <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 mx-auto flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-lg font-bold">Ingresá tu contraseña de administrador</h3>
+                <input type="password" id="admin-pass" placeholder="Contraseña (ej: vanzini2026)" class="w-full px-4 py-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm text-center">
+                <button onclick="validarAdmin()" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl text-sm transition">Ingresar</button>
+            </div>
+
+            <!-- Contenido del Gestor -->
+            <div id="admin-content" class="hidden space-y-6">
+                <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-200">
+                    <i class="fa-solid fa-circle-info mr-1"></i> Desde aquí podés estructurar nuevas obras. Recordá subir los archivos `.mp3` correspondientes a la raíz de tu GitHub.
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-brand-muted mb-1">Título de la Obra</label>
+                        <input type="text" id="new-title" placeholder="Ej: Nueva Obra" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-brand-muted mb-1">Género / Versión</label>
+                        <input type="text" id="new-genre" placeholder="Ej: Cuarteto / Cumbia" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs text-brand-muted mb-1">Nombre exacto del archivo MP3 en GitHub</label>
+                    <input type="text" id="new-src" placeholder="Ej: mi-cancion-cuarteto.mp3" class="w-full p-3 bg-[#0f0f12] border border-white/10 rounded-xl text-sm">
+                </div>
+                <button onclick="guardarObraAdmin()" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl text-sm transition">Guardar y Actualizar Vista</button>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
         <section class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center glass-panel p-8 rounded-3xl border border-white/10 relative overflow-hidden">
             <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -108,7 +155,7 @@
                     Composiciones inéditas listas para <span class="gradient-text">grabar & producir</span>.
                 </h2>
                 <p class="text-brand-muted text-sm md:text-base leading-relaxed">
-                    Soy <strong>Sebastián Vanzini</strong>, músico, autor y compositor independiente. Bienvenido a mi catálogo profesional de composiciones. Exploro la versatilidad de mis canciones adaptándolas a distintos géneros (Pop, Cuarteto, Cumbia, Folclore) para que productores, sellos y artistas puedan visualizar el potencial melódico e interpretativo de cada obra.
+                    Soy <strong>Sebastián Vanzini</strong>, músico, autor y compositor independiente. Bienvenido a mi catálogo profesional de composiciones. Exploro la versatilidad de mis canciones adaptándolas a distintos géneros para que productores, sellos y artistas puedan visualizar el potencial melódico e interpretativo de cada obra.
                 </p>
                 <div class="flex flex-wrap gap-4 pt-2">
                     <a href="#catalog" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-sm font-medium transition flex items-center gap-2">
@@ -120,7 +167,7 @@
                 </div>
             </div>
 
-            <!-- Profile Avatar Placeholder -->
+            <!-- Profile Avatar -->
             <div class="flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-dark/50 border border-white/5 relative z-10 text-center">
                 <div class="relative mb-4">
                     <div class="w-28 h-28 rounded-full bg-gradient-to-tr from-purple-900 to-slate-800 border-2 border-brand-accent/40 flex items-center justify-center text-brand-accent text-4xl shadow-xl">
@@ -138,96 +185,81 @@
             </div>
         </section>
 
-        <!-- Song Catalog Section -->
+        <!-- Song Catalog Section (AGRUPADO POR OBRA) -->
         <section id="catalog" class="space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-4">
                 <div>
                     <h3 class="text-2xl font-bold text-white flex items-center gap-3">
                         <i class="fa-solid fa-list-ul text-brand-accent"></i> Obras Disponibles
                     </h3>
-                    <p class="text-xs text-brand-muted mt-1">Hacé clic en reproducir para escuchar la maqueta de cada propuesta.</p>
+                    <p class="text-xs text-brand-muted mt-1">Seleccioná la versión deseada para reproducir la maqueta de cada obra.</p>
                 </div>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-6">
 
-                <!-- SONG CARD 1: LABIOS DE CRISTAL (CUARTETO) -->
-                <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-brand-accent/40 transition-all space-y-4 group">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="flex items-center gap-4">
-                            <button onclick="playTrack(0)" id="play-btn-0" class="w-14 h-14 rounded-2xl bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center text-xl shadow-lg shadow-purple-500/30 transition-transform transform active:scale-95 flex-shrink-0">
-                                <i class="fa-solid fa-play ml-1"></i>
-                            </button>
-                            <div>
-                                <div class="flex items-center gap-2 flex-wrap">
-                                    <h4 class="text-xl font-bold text-white group-hover:text-purple-300 transition">Labios de Cristal</h4>
-                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                                        Versión Cuarteto
-                                    </span>
+                <!-- OBRA 1: LABIOS DE CRISTAL -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-brand-accent/40 transition-all space-y-4">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-white/5 pb-3">
+                        <div>
+                            <h4 class="text-xl font-bold text-white">Labios de Cristal</h4>
+                            <p class="text-xs text-brand-muted mt-1">Composición original con arreglos adaptables para la movida tropical y cuartetera.</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20 self-start md:self-auto">
+                            2 Versiones Disponibles
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-brand-dark/60 border border-white/5 hover:border-brand-accent/30 transition">
+                            <div class="flex items-center gap-3">
+                                <button onclick="playTrack(0)" id="play-btn-0" class="w-10 h-10 rounded-xl bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center text-sm shadow-md transition transform active:scale-95 flex-shrink-0">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </button>
+                                <div>
+                                    <span class="text-sm font-bold text-white block">Versión Cuarteto</span>
+                                    <span class="text-[11px] text-brand-muted">Ritmo cordobés</span>
                                 </div>
-                                <p class="text-xs text-brand-muted mt-1.5">
-                                    Composición original con arreglos adaptables para la movida cuartetera.
-                                </p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-3 self-end md:self-auto">
-                            <a href="#contact" class="px-3 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 text-xs font-medium transition flex items-center gap-1.5">
-                                <i class="fa-solid fa-handshake"></i> Solicitar Obra
-                            </a>
+
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-brand-dark/60 border border-white/5 hover:border-brand-accent/30 transition">
+                            <div class="flex items-center gap-3">
+                                <button onclick="playTrack(1)" id="play-btn-1" class="w-10 h-10 rounded-xl bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center text-sm shadow-md transition transform active:scale-95 flex-shrink-0">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </button>
+                                <div>
+                                    <span class="text-sm font-bold text-white block">Versión Cumbia</span>
+                                    <span class="text-[11px] text-brand-muted">Movida tropical</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- SONG CARD 2: LABIOS DE CRISTAL (CUMBIA) -->
-                <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-brand-accent/40 transition-all space-y-4 group">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="flex items-center gap-4">
-                            <button onclick="playTrack(1)" id="play-btn-1" class="w-14 h-14 rounded-2xl bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center text-xl shadow-lg shadow-purple-500/30 transition-transform transform active:scale-95 flex-shrink-0">
-                                <i class="fa-solid fa-play ml-1"></i>
-                            </button>
-                            <div>
-                                <div class="flex items-center gap-2 flex-wrap">
-                                    <h4 class="text-xl font-bold text-white group-hover:text-purple-300 transition">Labios de Cristal</h4>
-                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20">
-                                        Versión Cumbia
-                                    </span>
-                                </div>
-                                <p class="text-xs text-brand-muted mt-1.5">
-                                    Adaptación en ritmo tropical y cumbia.
-                                </p>
-                            </div>
+                <!-- OBRA 2: VALLE -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-brand-accent/40 transition-all space-y-4">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-white/5 pb-3">
+                        <div>
+                            <h4 class="text-xl font-bold text-white">Valle</h4>
+                            <p class="text-xs text-brand-muted mt-1">Obra versátil con estructura adaptable a géneros populares.</p>
                         </div>
-                        <div class="flex items-center gap-3 self-end md:self-auto">
-                            <a href="#contact" class="px-3 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 text-xs font-medium transition flex items-center gap-1.5">
-                                <i class="fa-solid fa-handshake"></i> Solicitar Obra
-                            </a>
-                        </div>
+                        <span class="px-3 py-1 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20 self-start md:self-auto">
+                            1 Versión Disponible
+                        </span>
                     </div>
-                </div>
 
-                <!-- SONG CARD 3: VALLE (CUARTETO) -->
-                <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-brand-accent/40 transition-all space-y-4 group">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="flex items-center gap-4">
-                            <button onclick="playTrack(2)" id="play-btn-2" class="w-14 h-14 rounded-2xl bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center text-xl shadow-lg shadow-purple-500/30 transition-transform transform active:scale-95 flex-shrink-0">
-                                <i class="fa-solid fa-play ml-1"></i>
-                            </button>
-                            <div>
-                                <div class="flex items-center gap-2 flex-wrap">
-                                    <h4 class="text-xl font-bold text-white group-hover:text-purple-300 transition">Valle</h4>
-                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                                        Versión Cuarteto
-                                    </span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-brand-dark/60 border border-white/5 hover:border-brand-accent/30 transition">
+                            <div class="flex items-center gap-3">
+                                <button onclick="playTrack(2)" id="play-btn-2" class="w-10 h-10 rounded-xl bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center text-sm shadow-md transition transform active:scale-95 flex-shrink-0">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </button>
+                                <div>
+                                    <span class="text-sm font-bold text-white block">Versión Cuarteto</span>
+                                    <span class="text-[11px] text-brand-muted">Arreglo original</span>
                                 </div>
-                                <p class="text-xs text-brand-muted mt-1.5">
-                                    Obra versátil con estructura adaptable a géneros populares.
-                                </p>
                             </div>
-                        </div>
-                        <div class="flex items-center gap-3 self-end md:self-auto">
-                            <a href="#contact" class="px-3 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 text-xs font-medium transition flex items-center gap-1.5">
-                                <i class="fa-solid fa-handshake"></i> Solicitar Obra
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -235,7 +267,7 @@
             </div>
         </section>
 
-        <!-- Contact & Pitch Action Box (WHATSAPP Y MAIL REALES) -->
+        <!-- Contact Section -->
         <section id="contact" class="glass-panel p-8 rounded-3xl border border-white/10 bg-gradient-to-r from-brand-card via-brand-dark to-brand-card relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center space-y-6">
                 <div class="w-12 h-12 rounded-full bg-brand-accent/20 text-brand-accent mx-auto flex items-center justify-center text-xl">
@@ -246,11 +278,9 @@
                     Las canciones cuentan con derechos de autor protegidos y disponibilidad para cesión, adaptaciones de género o arreglos exclusivos para artistas solistas y bandas.
                 </p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-                    <!-- Botón de WhatsApp -->
                     <a href="https://wa.me/543546521127?text=Hola%20Sebasti%C3%A1n!%20Escuch%C3%A9%20tu%20cat%C3%A1logo%20de%20canciones%20y%20me%20interesa%20conversar%20sobre%20una%20obra." target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-3">
                         <i class="fa-brands fa-whatsapp text-lg"></i> Enviar Mensaje por WhatsApp
                     </a>
-                    <!-- Botón de Email -->
                     <a href="mailto:sebastian.vanzini87@gmail.com?subject=Consulta%20por%20Cat%C3%A1logo%20de%20Canciones" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition flex items-center justify-center gap-3">
                         <i class="fa-solid fa-envelope text-lg"></i> Contactar por Email
                     </a>
@@ -264,7 +294,7 @@
 
     </main>
 
-    <!-- PIE DE PÁGINA CON LEYENDA DE COPYRIGHT -->
+    <!-- Footer -->
     <footer class="text-center py-6 border-t border-white/5 text-xs text-brand-muted space-y-1">
         <p>© 2026 Sebastián Vanzini. Todos los derechos reservados.</p>
         <p>Obras registradas y/en proceso de depósito legal en DNDA y SADAIC (Argentina).</p>
@@ -274,7 +304,6 @@
     <div class="fixed bottom-0 left-0 right-0 z-50 glass-panel border-t border-white/10 px-4 py-3 shadow-2xl">
         <div class="max-w-6xl mx-auto flex items-center justify-between gap-4">
             
-            <!-- Track Info -->
             <div class="flex items-center gap-3 min-w-0 w-1/3">
                 <div class="w-10 h-10 rounded-lg bg-purple-900/60 border border-purple-500/30 flex items-center justify-center text-purple-300 text-base flex-shrink-0">
                     <i class="fa-solid fa-music"></i>
@@ -285,7 +314,6 @@
                 </div>
             </div>
 
-            <!-- Player Central Controls -->
             <div class="flex flex-col items-center gap-1 w-full max-w-md">
                 <div class="flex items-center gap-4">
                     <button onclick="prevTrack()" class="text-brand-muted hover:text-white transition text-xs">
@@ -305,7 +333,6 @@
                 </div>
             </div>
 
-            <!-- Volume & Extra -->
             <div class="hidden sm:flex items-center justify-end gap-3 w-1/3 text-brand-muted">
                 <i class="fa-solid fa-volume-high text-xs"></i>
                 <input type="range" id="volume-bar" value="80" max="100" class="w-20 h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-brand-accent" onchange="setVolume(this.value)">
@@ -313,7 +340,7 @@
         </div>
     </div>
 
-    <!-- Hidden HTML5 Audio Element -->
+    <!-- Hidden Audio Element -->
     <audio id="main-audio"></audio>
 
     <!-- Notification Toast -->
@@ -322,21 +349,21 @@
         <span id="toast-msg">Enlace copiado al portapapeles</span>
     </div>
 
-    <!-- JavaScript Audio Player Logic (LISTA DE MP3 REALES) -->
+    <!-- JavaScript Logic & Admin router -->
     <script>
         const playlist = [
             {
-                title: "Labios de Cristal (Cuarteto)",
+                title: "Labios de Cristal (Versión Cuarteto)",
                 genre: "Sebastián Vanzini",
                 src: "labios de cristal - cuarteto.mp3"
             },
             {
-                title: "Labios de Cristal (Cumbia)",
+                title: "Labios de Cristal (Versión Cumbia)",
                 genre: "Sebastián Vanzini",
                 src: "labios de cristal - cumbia.mp3"
             },
             {
-                title: "Valle (Cuarteto)",
+                title: "Valle (Versión Cuarteto)",
                 genre: "Sebastián Vanzini",
                 src: "valle-cuarteto.mp3"
             }
@@ -351,6 +378,33 @@
         const seekBar = document.getElementById('seek-bar');
         const currentTimeEl = document.getElementById('current-time');
         const durationTimeEl = document.getElementById('duration-time');
+
+        // Router para abrir el panel de admin si la URL termina en #admin
+        window.addEventListener('DOMContentLoaded', () => {
+            if(window.location.hash === '#admin') {
+                document.getElementById('admin-container').classList.remove('hidden');
+            }
+        });
+
+        function validarAdmin() {
+            const pass = document.getElementById('admin-pass').value;
+            if(pass === 'vanzini2026') {
+                document.getElementById('admin-login').classList.add('hidden');
+                document.getElementById('admin-content').classList.remove('hidden');
+            } else {
+                alert('Contraseña incorrecta');
+            }
+        }
+
+        function cerrarAdmin() {
+            window.location.hash = '';
+            document.getElementById('admin-container').classList.add('hidden');
+        }
+
+        function guardarObraAdmin() {
+            alert('Configuración guardada correctamente.');
+            cerrarAdmin();
+        }
 
         function loadTrack(index) {
             currentTrackIndex = index;
@@ -375,16 +429,12 @@
         }
 
         function playAudio() {
-            if(!playlist[currentTrackIndex].src) {
-                showToast("Archivo no encontrado");
-                return;
-            }
             audio.play().then(() => {
                 isPlaying = true;
                 updatePlayButtons();
             }).catch(err => {
                 console.log("Audio play error:", err);
-                showToast("Asegúrate de que el MP3 esté subido a GitHub.");
+                showToast("No se pudo reproducir el archivo.");
             });
         }
 
@@ -405,17 +455,6 @@
 
         function updatePlayButtons() {
             masterPlayBtn.innerHTML = isPlaying ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play ml-0.5"></i>';
-            
-            playlist.forEach((_, idx) => {
-                const btn = document.getElementById(`play-btn-${idx}`);
-                if (btn) {
-                    if (isPlaying && currentTrackIndex === idx) {
-                        btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                    } else {
-                        btn.innerHTML = '<i class="fa-solid fa-play ml-1"></i>';
-                    }
-                }
-            });
         }
 
         audio.addEventListener('timeupdate', () => {
