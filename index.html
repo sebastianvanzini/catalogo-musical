@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Obras Originales | Pitching para Productores</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f0f12',
+                            card: '#18181c',
+                            cardHover: '#222228',
+                            accent: '#8b5cf6',
+                            accentHover: '#7c3aed',
+                            gold: '#f59e0b',
+                            text: '#f3f4f6',
+                            muted: '#9ca3af'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f0f12;
+            color: #f3f4f6;
+        }
+        .glass-panel {
+            background: rgba(24, 24, 28, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0f12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-purple-500 selection:text-white pb-28">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-white/5 px-4 lg:px-8 py-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-amber-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-purple-500/20">
+                    <i class="fa-solid fa-compact-disc animate-spin-slow"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-white leading-none">Compositor & Autor</h1>
+                    <span class="text-xs text-brand-muted tracking-wide uppercase">Catálogo de Obras Originales</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Obras Registradas DNDA / SADAIC
+                </span>
+                <a href="#contact" class="px-4 py-2 text-sm font-medium rounded-lg bg-brand-accent hover:bg-brand-accentHover text-white transition-all shadow-lg shadow-purple-500/20 flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-xs"></i> Contactar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 lg:px-8 py-10 w-full flex-grow space-y-12">
+
+        <!-- Hero Section -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center glass-panel p-8 rounded-3xl border border-white/10 relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="md:col-span-2 space-y-4 relative z-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-purple-500/10 text-purple-300 text-xs font-semibold border border-purple-500/20">
+                    <i class="fa-solid fa-music"></i> Pitching para Editoriales & Productores
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                    Composiciones inéditas listas para <span class="gradient-text">grabar & producir</span>.
+                </h2>
+                <p class="text-brand-muted text-sm md:text-base leading-relaxed">
+                    Catálogo de canciones originales desarrolladas con maquetas de alta definición vocal y melódica. Diseñadas para ceder derechos de interpretación, grabación y adaptación en géneros populares (Cumbia Santafesina, Vallenato, Cuarteto, Pop).
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#catalog" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-sm font-medium transition flex items-center gap-2">
+                        <i class="fa-solid fa-headphones text-purple-400"></i> Escuchar Maquetas
+                    </a>
+                    <button onclick="copyPitchLink()" class="px-5 py-2.5 rounded-xl bg-transparent border border-white/10 hover:border-white/20 text-brand-muted hover:text-white text-sm font-medium transition flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> Copiar Link de Catálogo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profile / Studio Avatar Placeholder -->
+            <div class="flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-dark/50 border border-white/5 relative z-10 text-center">
+                <div class="relative mb-4">
+                    <div class="w-28 h-28 rounded-full bg-gradient-to-tr from-purple-900 to-slate-800 border-2 border-brand-accent/40 flex items-center justify-center text-brand-accent text-4xl shadow-xl">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div class="absolute bottom-0 right-0 bg-brand-gold text-black rounded-full p-2 text-xs font-bold shadow-md">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                </div>
+                <h3 class="font-bold text-white text-base">Estudio & Autoría</h3>
+                <p class="text-xs text-brand-muted mt-1">Letra, Melodías & Armonías Originales</p>
+                <div class="mt-3 inline-block px-3 py-1 bg-white/5 rounded-full text-[11px] text-amber-400">
+                    <i class="fa-solid fa-shield-halved mr-1"></i> Protegido bajo SADAIC
+                </div>
+            </div>
+        </section>
+
+        <!-- Song Catalog Section -->
+        <section id="catalog" class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-4">
+                <div>
+                    <h3 class="text-2xl font-bold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-list-ul text-brand-accent"></i> Obras Disponibles
+                    </h3>
+                    <p class="text-xs text-brand-muted mt-1">Hacé clic en reproducir para escuchar la maqueta de cada propuesta.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-brand-muted">Filtrar:</span>
+                    <span class="px-3 py-1 rounded-lg text-xs font-medium bg-brand-accent text-white">Todas</span>
+                    <span class="px-3 py-1 rounded-lg text-xs font-medium bg-brand-card hover:bg-brand-cardHover text-brand-muted cursor-pointer">Cumbia / Vallenato</span>
+                    <span class="px-3 py-1 rounded-lg text-xs font-medium bg-brand-card hover:bg-brand-cardHover text-brand-muted cursor-pointer">Cuarteto</span>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+
+                <!-- SONG CARD 1: VALLE -->
+                <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-brand-accent/40 transition-all space-y-4 group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <!-- Play button for Track 1 -->
+                            <button onclick="playTrack(0)" id="play-btn-0" class="w-14 h-14 rounded-2xl bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center text-xl shadow-lg shadow-purple-500/30 transition-transform transform active:scale-95 flex-shrink-0">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </button>
+                            <div>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <h4 class="text-xl font-bold text-white group-hover:text-purple-300 transition">Valle</h4>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                        Cumbia Santafesina / Vallenato
+                                    </span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/5 text-brand-muted">
+                                        120 BPM
+                                    </span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/5 text-brand-muted">
+                                        Tono: Am
+                                    </span>
+                                </div>
+                                <p class="text-xs text-brand-muted mt-1.5 line-clamp-1">
+                                    Progresión: <code class="text-amber-300 font-mono">Am - Dm - G - C</code> | Letra y melodía original completa registrada.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Track Controls & Actions -->
+                        <div class="flex items-center gap-3 self-end md:self-auto">
+                            <button onclick="toggleLyrics('lyrics-0')" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-medium text-white transition flex items-center gap-2">
+                                <i class="fa-solid fa-align-left text-brand-accent"></i> Ver Letra & Acordes
+                            </button>
+                            <a href="#contact" class="px-3 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 text-xs font-medium transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-handshake"></i> Solicitar Obra
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Expandable Lyrics Sheet Section -->
+                    <div id="lyrics-0" class="hidden pt-4 border-t border-white/5 space-y-3">
+                        <div class="flex items-center justify-between text-xs text-brand-muted font-medium">
+                            <span><i class="fa-solid fa-file-lines mr-1"></i> Estructura y Letra Técnica</span>
+                            <span class="text-amber-400">Prog. Armónica: Am - Dm - G - C</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-brand-dark/80 border border-white/5 text-xs text-brand-muted font-mono leading-relaxed max-h-64 overflow-y-auto space-y-3">
+                            <div>
+                                <span class="text-purple-400 font-bold block">[Verse 1]</span>
+                                <span class="text-white">Vacío está mi corazón</span><br>
+                                Es muy triste esta sensación<br>
+                                Doy vueltas sin saber qué hacer<br>
+                                Mi alma no quiere entender
+                            </div>
+                            <div>
+                                <span class="text-purple-400 font-bold block">[Verse 2]</span>
+                                <span class="text-white">Que tus ojos no estarán aquí</span><br>
+                                Que tus brazos se me van a ir<br>
+                                Y tus manos no me tocarán<br>
+                                Y tus besos labios estarán allá
+                            </div>
+                            <div>
+                                <span class="text-amber-400 font-bold block">[Chorus]</span>
+                                <span class="text-amber-200 font-semibold">Ese valle se lleva mi vida</span><br>
+                                En tus maletas te llevas mi vida<br>
+                                Y tus besos se llevan mi vida<br>
+                                Y tus sueños se llevan mi vida
+                            </div>
+                            <div>
+                                <span class="text-purple-400 font-bold block">[Bridge]</span>
+                                <span class="text-white">Quiero volar y nunca más volver</span><br>
+                                Quiero dejar mi cuerpo otra vez<br>
+                                La cama que ardía, está triste y fría<br>
+                                Mi cuerpo se cae y no encuentra salida porque...
+                            </div>
+                            <div>
+                                <span class="text-purple-400 font-bold block">[Outro]</span>
+                                <span class="text-white">Dios, ¿cómo sobrevivir?</span><br>
+                                Si me deja mi Dios, ¿cómo sobrevivir?<br>
+                                Si me quedo sin Dios, ¿cómo sobrevivir?
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SONG CARD 2: PLACEHOLDER FOR NEXT TRACK -->
+                <div class="glass-panel p-5 rounded-2xl border border-white/5 hover:border-white/10 transition-all opacity-85 space-y-4">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <button onclick="playTrack(1)" id="play-btn-1" class="w-14 h-14 rounded-2xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-xl shadow-md transition-transform transform active:scale-95 flex-shrink-0">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </button>
+                            <div>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <h4 class="text-xl font-bold text-white">Obra #2 (Próximo Lanzamiento)</h4>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                                        Cuarteto Moderno / Pop
+                                    </span>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/5 text-brand-muted">
+                                        135 BPM
+                                    </span>
+                                </div>
+                                <p class="text-xs text-brand-muted mt-1.5">
+                                    Maqueta instrumental y guía vocal en etapa de masterización final.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end md:self-auto">
+                            <button onclick="toggleLyrics('lyrics-1')" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-medium text-brand-muted hover:text-white transition flex items-center gap-2">
+                                <i class="fa-solid fa-align-left text-brand-accent"></i> Ver Referencia
+                            </button>
+                        </div>
+                    </div>
+                    <div id="lyrics-1" class="hidden pt-4 border-t border-white/5">
+                        <p class="text-xs text-brand-muted font-mono p-3 rounded-xl bg-brand-dark/50">
+                            Ficha técnica y demo de audio disponible bajo consulta directa.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact & Pitch Action Box -->
+        <section id="contact" class="glass-panel p-8 rounded-3xl border border-white/10 bg-gradient-to-r from-brand-card via-brand-dark to-brand-card relative overflow-hidden">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="w-12 h-12 rounded-full bg-brand-accent/20 text-brand-accent mx-auto flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold text-white">¿Te interesa interpretar o producir alguna de estas obras?</h3>
+                <p class="text-brand-muted text-sm leading-relaxed">
+                    Las canciones cuentan con derechos de autor protegidos y disponibilidad para cesión, adaptaciones de género o arreglos exclusivos para artistas solistas y bandas.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+                    <!-- WhatsApp Contact Button -->
+                    <a href="https://wa.me/?text=Hola!%20Escuch%C3%A9%20tu%20cat%C3%A1logo%20de%20canciones%20y%20me%20interesa%20conversar%20sobre%20una%20obra." target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Enviar Mensaje por WhatsApp
+                    </a>
+                    <!-- Direct Email Button -->
+                    <a href="mailto:contacto@tusitio.com?subject=Consulta%20por%20Catálogo%20de%20Canciones" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-envelope text-lg"></i> Contactar por Email
+                    </a>
+                </div>
+                <div class="pt-4 text-xs text-brand-muted flex items-center justify-center gap-4 flex-wrap">
+                    <span><i class="fa-solid fa-check text-emerald-400 mr-1"></i> Respuesta directa</span>
+                    <span><i class="fa-solid fa-check text-emerald-400 mr-1"></i> Fichas técnicas completas</span>
+                    <span><i class="fa-solid fa-check text-emerald-400 mr-1"></i> Stems & Guías disponibles</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global Floating Audio Player Bar -->
+    <div class="fixed bottom-0 left-0 right-0 z-50 glass-panel border-t border-white/10 px-4 py-3 shadow-2xl">
+        <div class="max-w-6xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Track Info -->
+            <div class="flex items-center gap-3 min-w-0 w-1/3">
+                <div class="w-10 h-10 rounded-lg bg-purple-900/60 border border-purple-500/30 flex items-center justify-center text-purple-300 text-base flex-shrink-0">
+                    <i class="fa-solid fa-music"></i>
+                </div>
+                <div class="min-w-0">
+                    <h5 id="player-title" class="text-sm font-bold text-white truncate">Selecciona una obra</h5>
+                    <p id="player-artist" class="text-xs text-brand-muted truncate">Catálogo de Maquetas</p>
+                </div>
+            </div>
+
+            <!-- Player Central Controls -->
+            <div class="flex flex-col items-center gap-1 w-full max-w-md">
+                <div class="flex items-center gap-4">
+                    <button onclick="prevTrack()" class="text-brand-muted hover:text-white transition text-xs">
+                        <i class="fa-solid fa-backward-step"></i>
+                    </button>
+                    <button onclick="toggleMasterPlay()" id="master-play-btn" class="w-9 h-9 rounded-full bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center text-sm shadow-md transition transform active:scale-95">
+                        <i class="fa-solid fa-play ml-0.5"></i>
+                    </button>
+                    <button onclick="nextTrack()" class="text-brand-muted hover:text-white transition text-xs">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </button>
+                </div>
+                <div class="w-full flex items-center gap-2">
+                    <span id="current-time" class="text-[10px] text-brand-muted font-mono w-8 text-right">0:00</span>
+                    <input type="range" id="seek-bar" value="0" max="100" class="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-brand-accent" onchange="seekAudio(this.value)">
+                    <span id="duration-time" class="text-[10px] text-brand-muted font-mono w-8">0:00</span>
+                </div>
+            </div>
+
+            <!-- Volume & Extra -->
+            <div class="hidden sm:flex items-center justify-end gap-3 w-1/3 text-brand-muted">
+                <i class="fa-solid fa-volume-high text-xs"></i>
+                <input type="range" id="volume-bar" value="80" max="100" class="w-20 h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-brand-accent" onchange="setVolume(this.value)">
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden HTML5 Audio Element -->
+    <audio id="main-audio"></audio>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed top-20 right-5 z-50 transform translate-x-full transition-transform duration-300 bg-brand-card border border-brand-accent/40 text-white px-4 py-3 rounded-xl shadow-xl text-xs flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-msg">Enlace copiado al portapapeles</span>
+    </div>
+
+    <!-- JavaScript Audio Player Logic -->
+    <script>
+        // Playlist Configuration (Replace Audio URLs with your actual MP3 links or local files)
+        const playlist = [
+            {
+                title: "Valle",
+                genre: "Cumbia Santafesina / Vallenato",
+                // Demo placeholder audio audio URL (can be replaced with your actual MP3 file link)
+                src: "Valle.mp3"
+            },
+            {
+                title: "Obra #2 (Próximo Lanzamiento)",
+                genre: "Cuarteto Moderno / Pop",
+                src: ""
+            }
+        ];
+
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+        const audio = document.getElementById('main-audio');
+        const masterPlayBtn = document.getElementById('master-play-btn');
+        const playerTitle = document.getElementById('player-title');
+        const playerArtist = document.getElementById('player-artist');
+        const seekBar = document.getElementById('seek-bar');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationTimeEl = document.getElementById('duration-time');
+
+        function loadTrack(index) {
+            currentTrackIndex = index;
+            const track = playlist[index];
+            playerTitle.textContent = track.title;
+            playerArtist.textContent = track.genre;
+            if(track.src) {
+                audio.src = track.src;
+            }
+        }
+
+        function playTrack(index) {
+            if (currentTrackIndex !== index || !audio.src.includes(playlist[index].src)) {
+                loadTrack(index);
+            }
+            
+            if (isPlaying && currentTrackIndex === index) {
+                pauseAudio();
+            } else {
+                playAudio();
+            }
+        }
+
+        function playAudio() {
+            if(!playlist[currentTrackIndex].src) {
+                showToast("Audio de demostración en producción");
+                return;
+            }
+            audio.play().then(() => {
+                isPlaying = true;
+                updatePlayButtons();
+            }).catch(err => {
+                console.log("Audio play error:", err);
+                showToast("No se pudo cargar el audio. Verifica la ruta del archivo.");
+            });
+        }
+
+        function pauseAudio() {
+            audio.pause();
+            isPlaying = false;
+            updatePlayButtons();
+        }
+
+        function toggleMasterPlay() {
+            if (isPlaying) {
+                pauseAudio();
+            } else {
+                if(!audio.src) loadTrack(0);
+                playAudio();
+            }
+        }
+
+        function updatePlayButtons() {
+            // Master button
+            masterPlayBtn.innerHTML = isPlaying ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play ml-0.5"></i>';
+            
+            // Track item buttons
+            playlist.forEach((_, idx) => {
+                const btn = document.getElementById(`play-btn-${idx}`);
+                if (btn) {
+                    if (isPlaying && currentTrackIndex === idx) {
+                        btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                        btn.classList.add('bg-brand-accentHover');
+                    } else {
+                        btn.innerHTML = '<i class="fa-solid fa-play ml-1"></i>';
+                        btn.classList.remove('bg-brand-accentHover');
+                    }
+                }
+            });
+        }
+
+        // Audio Time updates
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                seekBar.value = progress;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+                durationTimeEl.textContent = formatTime(audio.duration);
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            isPlaying = false;
+            updatePlayButtons();
+        });
+
+        function seekAudio(value) {
+            if (audio.duration) {
+                audio.currentTime = (value / 100) * audio.duration;
+            }
+        }
+
+        function setVolume(value) {
+            audio.volume = value / 100;
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function nextTrack() {
+            let nextIndex = (currentTrackIndex + 1) % playlist.length;
+            playTrack(nextIndex);
+        }
+
+        function prevTrack() {
+            let prevIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+            playTrack(prevIndex);
+        }
+
+        // Toggle Lyrics Accordion
+        function toggleLyrics(id) {
+            const element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+
+        // Toast & Link Copy
+        function copyPitchLink() {
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            showToast("Enlace del catálogo copiado");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.remove('translate-x-full');
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        // Initialize default track details on load
+        window.onload = function() {
+            loadTrack(0);
+        };
+    </script>
+</body>
+</html>
